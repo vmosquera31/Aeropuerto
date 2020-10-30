@@ -1,8 +1,6 @@
- 
-package aeropuerto;
+ package aeropuerto;
 
 import java.util.Date;
-
 
 public class Aeropuerto {
    private String nombre;
@@ -10,6 +8,31 @@ public class Aeropuerto {
    private Date fechaDeInaguracion;
    private int numeroDeAviones;
    private Boolean Internacional;
+   
+   //composicion y agregacion//
+   
+   private Persona azafatas = null;
+   private Pista pistaDeAterrizaje;
+
+   //Inicializacion del metodo get y set de los atributos de composicion y 
+   //agregacion
+    public Persona getAzafatas() {
+        return azafatas;
+    }
+
+    public void setAzafatas(Persona azafatas) {
+        this.azafatas = azafatas;
+    }
+
+    public Pista getPistaDeAterrizaje() {
+        return pistaDeAterrizaje;
+    }
+
+    public void setPistaDeAterrizaje(Pista pistaDeAterrizaje) {
+        this.pistaDeAterrizaje = pistaDeAterrizaje;
+    }
+   
+   
 
     public Aeropuerto(String nombre,
             int numeroDeAerolineas,
@@ -21,6 +44,7 @@ public class Aeropuerto {
         this.fechaDeInaguracion = fechaDeInaguracion;
         this.numeroDeAviones = numeroDeAviones;
         this.Internacional = Internacional;
+        this.pistaDeAterrizaje = new Pista(true, true);
     }
     
     /**
@@ -33,7 +57,9 @@ public class Aeropuerto {
     this.Internacional = true;   
     } 
     
-    //Este metodo permite romper un contrato con una aerolinea y que se lleven sus aviones
+    //Este metodo permite romper un contrato con una aerolinea y que se lleven
+    //sus aviones
+    
     public void romperContratoConAerolineas () {
     this.numeroDeAerolineas -=1;
     this.numeroDeAviones -=10;
@@ -88,28 +114,26 @@ public class Aeropuerto {
               new Date(),
               50,
               false);
-      Aeropuerto aeropuertoDos = new Aeropuerto (
-              "Aeropuerto Bonilla Aragon",
-              20,
-              new Date(),
-              200,
-              true);
-  
       
+      Avion informacionDelAvion = new Avion(10, 
+              "Sandwich", 
+              14000, 
+              "Sharon Copella", 
+              30, 
+              "UNITEC");
       
-        System.out.println(aeropuertoUno.getNombre());
-        System.out.println(aeropuertoUno.getNumeroDeAerolineas());
-        System.out.println(aeropuertoUno.getNumeroDeAviones());
-        System.out.println(aeropuertoUno.getInternacional());
-        
-        aeropuertoUno.firmarAerolienas();
-        
-        System.out.println(aeropuertoUno.getNombre());
-        System.out.println(aeropuertoUno.getNumeroDeAerolineas());
-        System.out.println(aeropuertoUno.getNumeroDeAviones());
-        System.out.println(aeropuertoUno.getInternacional());
-        
-        
+      aeropuertoUno.setAzafatas(informacionDelAvion);
+      
+        System.out.println("Nombre azafata");
+        System.out.println(aeropuertoUno.getAzafatas().getNombreAzafata());
+        System.out.println("Edad Azafata");
+        System.out.println(aeropuertoUno.getAzafatas().getEdad());
+        System.out.println("Universidad donde fue preparada");
+        System.out.println(aeropuertoUno.getAzafatas().getUniversidad());
+        System.out.println("Buenas condiciones:");
+        System.out.println(aeropuertoUno.getPistaDeAterrizaje().getCondiciones());
+        System.out.println("En funcionamiento:");
+        System.out.println(aeropuertoUno.getPistaDeAterrizaje().getFuncionamiento());
     }
 
 }
